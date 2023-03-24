@@ -31,15 +31,6 @@ public class RetrieveCommits {
         }
     }
 
-    /*public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
-        try (InputStream is = new URL(url).openStream()) {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-            String jsonText = readAll(rd);
-            return new JSONObject(jsonText);
-        }
-    }*/
-
-
 
     public static void main(String[] args) throws IOException, JSONException {
 
@@ -56,18 +47,10 @@ public class RetrieveCommits {
 
         input.close();
 
-        //String projName ="ACCUMULO";
         int i = 0, total;
-        //Get JSON API for closed bugs w/ AV in the project
-        //do {
-        //Only gets a max of 1000 at a time, so must do this multiple times if bugs >1000
-        //j = i + 1000;
         String url = "https://api.github.com/repos/"+owner+"/"+repository+"/commits";
-        //JSONObject json = readJsonFromUrl(url);
         JSONArray commits = readJsonArrayFromUrl(url);
         total=commits.length();
-        //total = json.getInt("total");
-        //for (; i < total && i < j; i++) {
         for (; i < total; i++) {
             //Iterate through each commit
             JSONObject commit= commits.getJSONObject(i).getJSONObject("commit");
